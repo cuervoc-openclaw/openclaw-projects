@@ -10,7 +10,7 @@ _Learn about the person you're helping. Update this as you go._
 
 ## Context
 
-_(What do they care about? What projects are they working on? What annoys them? What makes them laugh? Build this over time.)_
+soy david pero en la web soy cuervoc y me gusta que me digan asi, me gusta mucho jugar lol soy un apasionado de ese juego . ademas me gustaria mucho mantener una familia con un negocio ese es mi proposito 
 
 ---
 
