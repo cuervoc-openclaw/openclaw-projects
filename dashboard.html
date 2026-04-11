@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔐 OpenClaw Credentials Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .dashboard {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 800px;
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .header p {
+            opacity: 0.9;
+            font-size: 16px;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .credentials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .credential-card {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+        
+        .credential-card:hover {
+            border-color: #4f46e5;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(79, 70, 229, 0.1);
+        }
+        
+        .credential-card h3 {
+            color: #1e293b;
+            margin-bottom: 15px;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        .input-group label {
+            display: block;
+            color: #475569;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #cbd5e1;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .input-group input:focus {
+            outline: none;
+            border-color: #4f46e5;
+        }
+        
+        .input-group input[type="password"] {
+            letter-spacing: 2px;
+        }
+        
+        .status {
+            margin-top: 10px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .status.valid {
+            color: #10b981;
+        }
+        
+        .status.invalid {
+            color: #ef4444;
+        }
+        
+        .actions {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 2px solid #e2e8f0;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(79, 70, 229, 0.3);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .info-box {
+            background: #f0f9ff;
+            border: 2px solid #bae6fd;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        
+        .info-box h4 {
+            color: #0369a1;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .info-box ul {
+            color: #475569;
+            padding-left: 20px;
+        }
+        
+        .info-box li {
+            margin-bottom: 8px;
+        }
+        
+        .token-preview {
+            font-family: 'Courier New', monospace;
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-size: 14px;
+            word-break: break-all;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                padding: 25px;
+            }
+            
+            .credentials-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <div class="header">
+            <h1>🔐 OpenClaw Credentials Dashboard</h1>
+            <p>Ingresa tus tokens de forma segura - Solo se almacenan temporalmente en memoria</p>
+        </div>
+        
+        <div class="content">
+            <div class="credentials-grid">
+                <!-- GitHub Credential -->
+                <div class="credential-card">
+                    <h3>🐙 GitHub Token</h3>
+                    <div class="input-group">
+                        <label for="githubToken">Personal Access Token</label>
+                        <input type="password" id="githubToken" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" 
+                               oninput="validateGitHubToken()">
+                    </div>
+                    <div id="githubStatus" class="status">
+                        <span>⏳ Esperando token...</span>
+                    </div>
+                    <div id="githubPreview" class="token-preview" style="display: none;">
+                        Token: <span id="githubPreviewText"></span>
+                    </div>
+                </div>
+                
+                <!-- Riot Games Credential -->
+                <div class="credential-card">
+                    <h3>⚔️ Riot Games API Key</h3>
+                    <div class="input-group">
+                        <label for="riotKey">Development API Key</label>
+                        <input type="password" id="riotKey" placeholder="RGAPI-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+                               oninput="validateRiotKey()">
+                    </div>
+                    <div id="riotStatus" class="status">
+                        <span>⏳ Esperando API key...</span>
+                    </div>
+                    <div id="riotPreview" class="token-preview" style="display: none;">
+                        Key: <span id="riotPreviewText"></span>
+                    </div>
+                </div>
+                
+                <!-- Custom API Credential -->
+                <div class="credential-card">
+                    <h3>🔧 API Personalizada</h3>
+                    <div class="input-group">
+                        <label for="customName">Nombre del servicio</label>
+                        <input type="text" id="customName" placeholder="Ej: OpenAI, Stripe, etc.">
+                    </div>
+                    <div class="input-group">
+                        <label for="customKey">API Key / Token</label>
+                        <input type="password" id="customKey" placeholder="sk-xxxxxxxxxxxxxxxxxxxx">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="actions">
+                <div class="status" id="serverStatus" style="margin-bottom: 15px;">
+                    🔄 Conectando al servidor seguro...
+                </div>
+                <button class="btn" onclick="sendCredentials()" id="sendBtn">
+                    📤 Enviar Credenciales al Asistente
+                </button>
+                <div style="margin-top: 15px;">
+                    <button class="btn" onclick="clearCredentials()" style="background: #64748b;">
+                        🗑️ Borrar Todas las Credenciales
+                    </button>
+                </div>
+            </div>
+            
+            <div class="info-box">
+                <h4>ℹ️ Información de Seguridad</h4>
+                <ul>
+                    <li>🔒 Los tokens <strong>NO</strong> se almacenan en disco</li>
+                    <li>⏱️ Se borran automáticamente después de 5 minutos</li>
+                    <li>🌐 Solo accesible desde tu red local</li>
+                    <li>📝 El asistente solo puede leerlos, no modificarlos</li>
+                    <li>🚫 Nunca se envían por chat o logs</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Estado temporal en memoria
+        let credentials = {
+            github: null,
+            riot: null,
+            custom: null
+        };
+        
+        // Validar token GitHub
+        function validateGitHubToken() {
+            const token = document.getElementById('githubToken').value;
+            const status = document.getElementById('githubStatus');
+            const preview = document.getElementById('githubPreview');
+            const previewText = document.getElementById('githubPreviewText');
+            
+            if (!token) {
+                status.innerHTML = '<span>⏳ Esperando token...</span>';
+                preview.style.display = 'none';
+                credentials.github = null;
+                return;
+            }
+            
+            // Validar formato básico de token GitHub
+            const isValid = token.startsWith('ghp_') || token.startsWith('github_pat_');
+            
+            if (isValid) {
+                status.innerHTML = '<span class="valid">✅ Token válido detectado</span>';
+                credentials.github = token;
+                
+                // Mostrar preview (primeros y últimos caracteres)
+                const previewToken = token.substring(0, 10) + '...' + token.substring(token.length - 4);
+                previewText.textContent = previewToken;
+                preview.style.display = 'block';
+            } else {
+                status.innerHTML = '<span class="invalid">⚠️ Formato de token no reconocido</span>';
+                preview.style.display = 'none';
+                credentials.github = null;
+            }
+            
+            updateSendButton();
+        }
+        
+        // Validar key Riot
+        function validateRiotKey() {
+            const key = document.getElementById('riotKey').value;
+            const status = document.getElementById('riotStatus');
+            const preview = document.getElementById('riotPreview');
+            const previewText = document.getElementById('riotPreviewText');
+            
+            if (!key) {
+                status.innerHTML = '<span>⏳ Esperando API key...</span>';
+                preview.style.display = 'none';
+                credentials.riot = null;
+                return;
+            }
+            
+            // Validar formato básico de key Riot
+            const isValid = key.startsWith('RGAPI-');
+            
+            if (isValid) {
+                status.innerHTML = '<span class="valid">✅ API key válida detectada</span>';
+                credentials.riot = key;
+                
+                // Mostrar preview
+                const previewKey = key.substring(0, 10) + '...' + key.substring(key.length - 4);
+                previewText.textContent = previewKey;
+                preview.style.display = 'block';
+            } else {
+                status.innerHTML = '<span class="invalid">⚠️ Formato RGAPI- no encontrado</span>';
+                preview.style.display = 'none';
+                credentials.riot = null;
+            }
+            
+            updateSendButton();
+        }
+        
+        // Actualizar estado del botón
+        function updateSendButton() {
+            const btn = document.getElementById('sendBtn');
+            const hasCredentials = credentials.github || credentials.riot || credentials.custom;
+            
+            btn.disabled = !hasCredentials;
+            btn.innerHTML = hasCredentials 
+                ? '📤 Enviar Credenciales al Asistente' 
+                : '⏳ Ingresa al menos una credencial';
+        }
+        
+        // Enviar credenciales al servidor seguro
+        async function sendCredentials() {
+            const btn = document.getElementById('sendBtn');
+            const originalText = btn.innerHTML;
+            
+            // Deshabilitar botón temporalmente
+            btn.disabled = true;
+            btn.innerHTML = '🔄 Enviando al servidor seguro...';
+            
+            try {
+                // Preparar datos para enviar
+                const credentialsData = {};
+                
+                if (credentials.github) {
+                    credentialsData.github_token = credentials.github;
+                }
+                
+                if (credentials.riot) {
+                    credentialsData.riot_key = credentials.riot;
+                }
+                
+                const customName = document.getElementById('customName').value;
+                const customKey = document.getElementById('customKey').value;
+                if (customName && customKey) {
+                    credentialsData.custom = { [customName]: customKey };
+                }
+                
+                // Enviar al servidor
+                const response = await fetch('http://192.168.100.170:8081', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(credentialsData)
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`Error ${response.status}: ${response.statusText}`);
+                }
+                
+                const result = await response.json();
+                
+                alert(`✅ Credenciales almacenadas de forma segura\n\n` +
+                      `GitHub: ${result.received.github ? '✓' : '✗'}\n` +
+                      `Riot: ${result.received.riot ? '✓' : '✗'}\n` +
+                      `Custom: ${result.received.custom || 0} servicio(s)\n\n` +
+                      `El asistente ahora puede usar estas credenciales.\n` +
+                      `⏱️ Expirarán en 5 minutos por seguridad.`);
+                
+                // Actualizar estado del servidor
+                updateServerStatus();
+                
+            } catch (error) {
+                console.error('Error enviando credenciales:', error);
+                alert(`❌ Error enviando credenciales:\n${error.message}\n\n` +
+                      `Asegúrate de que el servidor esté ejecutándose:\n` +
+                      `python3 credentials_server.py`);
+            } finally {
+                // Restaurar botón
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+            }
+        }
+        
+        // Borrar credenciales
+        async function clearCredentials() {
+            if (!confirm('¿Estás seguro de borrar todas las credenciales almacenadas?')) {
+                return;
+            }
+            
+            try {
+                const response = await fetch('http://192.168.100.170:8081/clear');
+                if (response.ok) {
+                    alert('✅ Credenciales borradas del servidor seguro');
+                    
+                    // Limpiar formulario
+                    document.getElementById('githubToken').value = '';
+                    document.getElementById('riotKey').value = '';
+                    document.getElementById('customName').value = '';
+                    document.getElementById('customKey').value = '';
+                    
+                    // Actualizar UI
+                    validateGitHubToken();
+                    validateRiotKey();
+                    updateServerStatus();
+                }
+            } catch (error) {
+                alert('❌ Error borrando credenciales');
+            }
+        }
+        
+        // Actualizar estado del servidor
+        async function updateServerStatus() {
+            const statusElement = document.getElementById('serverStatus');
+            if (!statusElement) return;
+            
+            try {
+                const response = await fetch('http://192.168.100.170:8081/status');
+                if (response.ok) {
+                    const data = await response.json();
+                    
+                    if (data.store_active) {
+                        if (data.expired) {
+                            statusElement.innerHTML = '<span class="invalid">⚠️ Credenciales expiradas (5 minutos)</span>';
+                        } else {
+                            statusElement.innerHTML = '<span class="valid">✅ Credenciales activas en servidor seguro</span>';
+                        }
+                    } else {
+                        statusElement.innerHTML = '<span>⏳ Servidor listo - Sin credenciales almacenadas</span>';
+                    }
+                }
+            } catch (error) {
+                statusElement.innerHTML = '<span class="invalid">⚠️ Servidor no disponible</span>';
+            }
+        }
+        
+        // Auto-borrado después de 5 minutos
+        setTimeout(() => {
+            if (credentials.github || credentials.riot || credentials.custom) {
+                alert('🕒 Las credenciales han expirado (5 minutos). Por seguridad, se han borrado.');
+                credentials = { github: null, riot: null, custom: null };
+                
+                // Limpiar inputs
+                document.getElementById('githubToken').value = '';
+                document.getElementById('riotKey').value = '';
+                document.getElementById('customName').value = '';
+                document.getElementById('customKey').value = '';
+                
+                // Actualizar UI
+                validateGitHubToken();
+                validateRiotKey();
+                updateSendButton();
+            }
+        }, 5 * 60 * 1000); // 5 minutos
+        
+        // Inicializar
+        updateSendButton();
+    </script>
+</body>
+</html>
