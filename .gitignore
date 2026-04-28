@@ -1,0 +1,55 @@
+# Basura del sistema
+__pycache__/
+*.pyc
+*.pyo
+node_modules/
+*.log
+*.csv
+*.tgz
+cookies.txt
+.env
+ngrok
+
+# Archivos temporales del workspace
+dashboard.html
+dashboard.js
+*.html
+test-*.py
+test-*.js
+abrir-tdah.html
+farmaloop.html
+
+# Scripts antiguos / desechables
+credentials_server*.py
+credentials_server_fixed.py
+dashboard.log
+*.log
+restart_servers.sh
+start_*.sh
+stop_*.sh
+fix_*.sh
+final_*.sh
+setup_github_ssh.sh
+upload_all_ssh.sh
+do_everything_now.sh
+execute_everything.py
+execute_with_server_token.py
+read_credentials.py
+cors_patch.py
+fix_cors.sh
+create_father_repo*.py
+create_github_repo.py
+
+# Proyectos específicos que no van al repo principal
+salasconstrucciones/
+farm_game/
+w-d-pixel-perfect/
+astro-project/
+claw-monitor/
+TDAH-DASHBOARD/
+agents_fase1/
+facebook_post_construccion*.txt
+
+# Cosas del sistema
+.openclaw/
+.clawhub/
