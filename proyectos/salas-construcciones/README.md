@@ -1,6 +1,6 @@
 # 🏗️ Salas Construcciones
 
-*Creado: 2026-04-26 | Última actualización: 2026-04-26*
+*Creado: 2026-04-26 | Última actualización: 2026-04-28*
 
 ## URLs
 
@@ -11,24 +11,31 @@
 ## Stack técnico
 
 - **Frontend**: Astro
-- **Backend**: WordPress Headless (API REST)
-- **WordPress API**: Responde en `https://api.salasconstrucciones.com/?rest_route=/`
-- **Namespace personalizado**: `csalas/v1` (creado previamente)
-- **Autenticación**: Application Passwords disponible
+- **Backend**: WordPress Headless (REST API)
+- **API**: `csalas/v1` namespace custom
+- **Hosting**: LiteSpeed Web Server
 
-## Estado del sitio
+## Estado
 
-- Frontend online ✅ (tema con servicios y presupuestos)
-- API WordPress online ✅
-- WordPress REST API funciona con `?rest_route=` en lugar de `/wp-json/` (configuración del servidor LiteSpeed)
-- Hosting: LiteSpeed Web Server
+- ✅ Frontend online
+- ✅ API WordPress operativa
+- ✅ Contenido poblado (ver WP-SETUP.md)
+- ❌ Frontend no sincronizado con API
 
-## Historial
+## Conexión
 
-- Se subió información al WordPress anteriormente (contenido, servicios, etc.)
+Para operar el WordPress via API necesitas:
+1. Ir a Perfil > Application Passwords
+2. Generar password para la app
+3. Usar autenticación Basic + nonce
+
+## Scripts
+
+- `scripts/update_services.py` — Actualizar servicios vía API
 
 ## Pendientes
 
-- [ ] Revisar contenido actual del WordPress
-- [ ] Sincronizar frontend con los datos de la API
-- [ ] Documentar endpoints del namespace `csalas/v1`
+- [ ] Agregar datos de contacto reales
+- [ ] Subir imágenes de proyectos realizados
+- [ ] Sincronizar frontend Astro con datos de la API
+- [ ] Configurar SEO (meta tags, OG, schema)
