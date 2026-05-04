@@ -1,0 +1,66 @@
+{
+  "version": 1,
+  "updatedAt": "2026-04-16T04:39:09.224Z",
+  "entries": {
+    "memory:memory/2026-04-14.md:28:54": {
+      "key": "memory:memory/2026-04-14.md:28:54",
+      "path": "memory/2026-04-14.md",
+      "startLine": 28,
+      "endLine": 54,
+      "source": "memory",
+      "snippet": "- **Pendiente**: Usuario activar GitHub Pages para preview público ### 2. Web scraping farmaloop.cl - **Estado**: CSV creado con estructura, datos de ejemplo - **Riesgo**: Scraping masivo podría bloquear IP - **Solución propuesta**: Búsquedas puntuales de productos clave ## 💡 Aprendizajes del día 1. **Seguridad en web scraping**: Usuario consciente de riesgos de bloqueo IP 2. **Farmacias online chilenas**: Farmaloop.cl tiene modelo interesante de sostenibilidad (evitar destrucción medicamentos) 3. **Medicamentos solicitados**: Usuario interesado en: - Control de peso/diabetes (Ozempic, Saxenda) - Fertilidad (Omnitrope, Gonal) - Salud mental (Clonazepam, Sertralina) ## 🔄 Pendie",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "totalScore": 0.4991114944219589,
+      "maxScore": 0.4991114944219589,
+      "firstRecalledAt": "2026-04-16T04:39:09.224Z",
+      "lastRecalledAt": "2026-04-16T04:39:09.224Z",
+      "queryHashes": [
+        "45268f2fa40e"
+      ],
+      "recallDays": [
+        "2026-04-16"
+      ],
+      "conceptTags": [
+        "farmaloop.cl",
+        "peso/diabetes",
+        "pendiente",
+        "usuario",
+        "activar",
+        "github",
+        "pages",
+        "preview"
+      ]
+    },
+    "memory:memory/2026-04-14.md:1:37": {
+      "key": "memory:memory/2026-04-14.md:1:37",
+      "path": "memory/2026-04-14.md",
+      "startLine": 1,
+      "endLine": 37,
+      "source": "memory",
+      "snippet": "# 2026-04-14 - Memoria del día ## 📅 Actividades del día ### 🌅 Mañana (00:00-12:00 UTC) - **00:04-00:15**: Web scraping de farmaloop.cl a solicitud del usuario - Extraje información general del sitio: categorías, productos destacados, contacto - Sitio es farmacia online chilena con descuentos hasta 80% - Modelo de negocio: liquidación de medicamentos cercanos a expirar ### 🌆 Tarde (12:00-18:00 UTC) - **00:11-00:15**: Búsqueda específica de productos farmacéuticos - Usuario solicitó lista extensa de medicamentos (Ozempic, Saxenda, Clonazepam, etc.) - Creé archivo CSV `productos_farmaloop_completo.csv` con estructura solicitada: - Columnas: Nombre Producto, Compuesto, URL, S",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "totalScore": 0.47237402498722075,
+      "maxScore": 0.47237402498722075,
+      "firstRecalledAt": "2026-04-16T04:39:09.224Z",
+      "lastRecalledAt": "2026-04-16T04:39:09.224Z",
+      "queryHashes": [
+        "45268f2fa40e"
+      ],
+      "recallDays": [
+        "2026-04-16"
+      ],
+      "conceptTags": [
+        "00-12",
+        "04-00",
+        "farmaloop.cl",
+        "00-18",
+        "11-00",
+        "productos-farmaloop-completo.csv",
+        "memoria",
+        "día"
+      ]
+    }
+  }
+}
