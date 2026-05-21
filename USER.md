@@ -3,7 +3,7 @@
 - **Nombre**: David Salas
 - **Edad**: 31 años
 - **Ubicación**: Santiago, Chile
-- **Teléfono**: +56949336814
+- **Teléfono**: +56949175254 (solo OpenClaw)
 - **Correo**: zionylenodavid@gmail.com
 - **TDAH**: Sí — necesita sistemas organizados, chats/proyectos separados, estructura clara
 - **Canal principal**: Web UI (navegador)

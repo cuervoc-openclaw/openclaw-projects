@@ -5,7 +5,7 @@
 ## 👤 Sobre David
 
 - **Nombre**: David Salas | 31 años | Santiago, Chile
-- **Teléfono**: +56949336814 | **Correo**: zionylenodavid@gmail.com
+- **Teléfono**: +56949175254 (solo OpenClaw) | **Correo**: zionylenodavid@gmail.com
 - **TDAH**: Necesita sistemas organizados, estructura clara, proyectos separados
 - **Canal principal para hablarme**: Web UI (navegador)
 - **Presupuesto**: Mínimo posible. DeepSeek es económico y suficiente. Nada de GPT-4 ni cosas caras.
