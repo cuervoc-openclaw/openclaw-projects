@@ -53,3 +53,5 @@ facebook_post_construccion*.txt
 # Cosas del sistema
 .openclaw/
 .clawhub/
+qr_*.png
+*.png
